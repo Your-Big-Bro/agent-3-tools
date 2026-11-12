@@ -1,0 +1,64 @@
+{
+  "entries": [
+    {
+      "id": "stack",
+      "title": "Стек проекта",
+      "tags": ["стек", "библиотеки", "python", "langchain", "langgraph", "ollama", "зависимости", "stack", "libraries", "dependencies"],
+      "text": "Python 3.10+, LangGraph (create_react_agent), langchain-core, langchain-ollama для локальной модели. Ядро (mock-режим, память, логи) работает на стандартной библиотеке и не требует установки пакетов."
+    },
+    {
+      "id": "tools",
+      "title": "Три инструмента агента",
+      "tags": ["инструменты", "tools", "калькулятор", "calculator", "время", "now", "lookup", "справочник"],
+      "text": "Три инструмента: calculator (арифметика через AST, без eval), now (дата, время и часовой пояс через zoneinfo), lookup (поиск по локальному файлу data/kb.json). Агент выбирает ровно один инструмент на запрос."
+    },
+    {
+      "id": "memory",
+      "title": "Память диалога",
+      "tags": ["память", "контекст", "история", "sqlite", "checkpointer", "memory", "history", "session", "сессия"],
+      "text": "История диалога хранится в SQLite (data/agent_state.sqlite) с ключом сессии. В LLM-режиме дополнительно используется чекпоинтер LangGraph, поэтому состояние переживает перезапуск. Сессия задаётся флагом --session."
+    },
+    {
+      "id": "logging",
+      "title": "Логирование выбора инструмента",
+      "tags": ["логи", "логирование", "logging", "jsonl", "logs", "выбор", "tool_choice"],
+      "text": "Каждый запуск пишется строкой JSON в logs/runs.jsonl: время, сессия, провайдер, вопрос, выбранный инструмент, аргументы, результат, длительность. То же самое печатается в консоль."
+    },
+    {
+      "id": "tracing",
+      "title": "Трейсинг LangSmith",
+      "tags": ["трейсинг", "langsmith", "трассировка", "tracing", "мониторинг"],
+      "text": "Трейсинг включается переменными LANGSMITH_TRACING, LANGSMITH_API_KEY и LANGSMITH_PROJECT в файле .env. Проект agent-3-tools создаётся автоматически при первом запуске с трейсингом."
+    },
+    {
+      "id": "run",
+      "title": "Как запускать",
+      "tags": ["запуск", "run", "команда", "cli", "start", "запустить"],
+      "text": "Запуск: python -m app (интерактивный режим), python -m app \"вопрос\" (один запрос), python -m app --demo (демонстрационный сценарий из шести запросов). Флаги: --session, --lang, --reset."
+    },
+    {
+      "id": "docker",
+      "title": "Docker",
+      "tags": ["docker", "контейнер", "container", "compose", "образ", "image"],
+      "text": "Сборка: docker build -t agent-3-tools .; запуск: docker run --rm --env-file .env agent-3-tools \"2+2\". Для LLM-режима Ollama остаётся на хосте, контейнер обращается к ней по адресу host.docker.internal:11434."
+    },
+    {
+      "id": "mock",
+      "title": "Mock-режим",
+      "tags": ["mock", "мок", "без модели", "offline", "демо", "demo"],
+      "text": "При LLM_PROVIDER=mock агент не использует модель: инструмент выбирается детерминированным роутером по ключевым словам. Это позволяет запустить и проверить проект без Ollama, ключей и интернета."
+    },
+    {
+      "id": "tests",
+      "title": "Тесты",
+      "tags": ["тесты", "pytest", "unittest", "проверка", "tests"],
+      "text": "Тесты лежат в каталоге tests и работают без сети и без модели. Запуск: python -m unittest discover -s tests -v (или pytest -q, если установлен)."
+    },
+    {
+      "id": "config",
+      "title": "Настройки и переменные окружения",
+      "tags": ["настройки", "env", "переменные", "config", "конфигурация", "timezone", "часовой пояс"],
+      "text": "Все настройки читаются из .env: LLM_PROVIDER, LLM_MODEL, OLLAMA_BASE_URL, PROMPT_LANG, APP_TIMEZONE, LANGSMITH_TRACING, LANGSMITH_API_KEY, LANGSMITH_PROJECT, LANGSMITH_ENDPOINT. Образец — .env.example."
+    }
+  ]
+}

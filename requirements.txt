@@ -1,0 +1,8 @@
+# Зависимости нужны только для LLM-режима (LLM_PROVIDER=ollama).
+# Mock-режим, память, логи и тесты работают на стандартной библиотеке Python —
+# без установки этих пакетов.
+
+langgraph>=0.2.60
+langgraph-checkpoint-sqlite>=2.0.0
+langchain-core>=0.3.0
+langchain-ollama>=0.2.0

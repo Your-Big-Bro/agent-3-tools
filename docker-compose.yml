@@ -1,0 +1,52 @@
+services:
+  app:
+    build:
+      context: .
+      args:
+        # 1 — образ с LangGraph/Ollama (LLM-режим), 0 — лёгкий образ только для mock
+        INSTALL_LLM: "1"
+    image: agent-3-tools:latest
+    container_name: agent-3-tools
+    env_file:
+      # Файл .env создаётся из .env.example и в git не попадает.
+      # required: false — чтобы `docker compose` не падал, если файла ещё нет.
+      - path: .env
+        required: false
+    environment:
+      # Значение из .env (http://localhost:11434) внутри контейнера указывает на сам контейнер,
+      # поэтому адрес задаётся отдельной переменной. Переопределить при необходимости:
+      #   OLLAMA_CONTAINER_BASE_URL=http://192.168.1.10:11434 docker compose run --rm app
+      OLLAMA_BASE_URL: ${OLLAMA_CONTAINER_BASE_URL:-http://host.docker.internal:11434}
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Интерактивный режим: docker compose run --rm app
+    stdin_open: true
+    tty: true
+
+  # ---------------------------------------------------------------------------
+  # Опциональный Postgres для чекпоинтера (см. раздел README «Переход на Postgres»).
+  # По умолчанию не запускается: docker compose --profile postgres up -d
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: agent-3-tools-db
+    profiles: ["postgres"]
+    environment:
+      POSTGRES_USER: agent
+      POSTGRES_PASSWORD: agent
+      POSTGRES_DB: agent
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agent -d agent"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

@@ -1,0 +1,34 @@
+# Секреты
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Данные во время работы
+data/*.sqlite
+data/*.sqlite-journal
+logs/
+*.log
+
+# Модели и их веса — в репозиторий не попадают (скачиваются через ollama pull)
+models/
+*.gguf
+*.safetensors
+*.bin
+.ollama/
+
+# Временные каталоги тестов
+.testtmp/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
