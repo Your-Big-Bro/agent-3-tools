@@ -42,6 +42,19 @@
 
 ---
 
+## Что выполнено по заданию
+
+| Требование | Реализация |
+|---|---|
+| Агент переключается на нужный tool | `app/agent.py` - ReAct-агент LangGraph; три инструмента в `app/tools/` |
+| Минимум 3 инструмента | `calculator`, `now`, `lookup` |
+| Видно, какой инструмент выбран | `app/logging_setup.py` → `logs/runs.jsonl` + консоль |
+| Память диалога | `app/memory.py` - SQLite + чекпоинтер LangGraph, сессии по `--session` |
+| Трейсинг | `app/tracing.py` - LangSmith через переменные окружения |
+| Docker | `Dockerfile`, `docker-compose.yml`, `.dockerignore` |
+
+---
+
 ## Структура
 
 ```
@@ -65,19 +78,6 @@ agent-3-tools/
 ├── docker-compose.yml
 └── .env.example
 ```
-
----
-
-## Что выполнено по заданию
-
-| Требование | Реализация |
-|---|---|
-| Агент переключается на нужный tool | `app/agent.py` - ReAct-агент LangGraph; три инструмента в `app/tools/` |
-| Минимум 3 инструмента | `calculator`, `now`, `lookup` |
-| Видно, какой инструмент выбран | `app/logging_setup.py` → `logs/runs.jsonl` + консоль |
-| Память диалога | `app/memory.py` - SQLite + чекпоинтер LangGraph, сессии по `--session` |
-| Трейсинг | `app/tracing.py` - LangSmith через переменные окружения |
-| Docker | `Dockerfile`, `docker-compose.yml`, `.dockerignore` |
 
 ---
 
