@@ -290,25 +290,6 @@ agent-3-tools/
 ├── docker-compose.yml
 └── .env.example
 ```
-
----
-
-## Связь с примером из статьи GeeksforGeeks
-
-В задании предложена статья [Agents and Tools in LangChain](https://www.geeksforgeeks.org/artificial-intelligence/agents-and-tools-in-langchain/).
-Она использует legacy-API (`AgentExecutor`, `create_openai_functions_agent`), который в LangChain 1.x удалён
-и несовместим с чекпоинтерами LangGraph. Поэтому сохранена **структура**, а не буквальный код:
-
-| В статье | В проекте |
-|---|---|
-| `@tool` с docstring | инструменты в `app/tools/`, описания в `app/prompts.py` |
-| `ChatPromptTemplate` + `MessagesPlaceholder("agent_scratchpad")` | системный промпт + `create_react_agent` (ReAct-цикл внутри LangGraph) |
-| `create_openai_tools_agent` + `AgentExecutor` | `create_react_agent` + чекпоинтер |
-| `verbose=True` | `RunLogger`: консоль + `logs/runs.jsonl` |
-| три инструмента (калькулятор, поиск, утилита) | `calculator`, `lookup`, `now` |
-
----
-
 ## Ограничения
 
 - Небольшая локальная модель (3B) иногда ошибается в выборе инструмента - для демонстрации есть mock-режим с предсказуемым поведением.
