@@ -42,6 +42,32 @@
 
 ---
 
+## Структура
+
+```
+agent-3-tools/
+├── app/
+│   ├── __main__.py       точка входа python -m app
+│   ├── cli.py            аргументы, REPL, демо-сценарий
+│   ├── config.py         чтение .env без внешних зависимостей
+│   ├── prompts.py        системные промпты и описания инструментов (ru/en)
+│   ├── router_mock.py    детерминированный выбор инструмента
+│   ├── agent.py          MockAgent и LLMAgent (LangGraph)
+│   ├── memory.py         история диалога в SQLite
+│   ├── logging_setup.py  журнал запусков
+│   ├── tracing.py        включение LangSmith
+│   ├── llm.py            ChatOllama + проверка доступности
+│   └── tools/            calculator, now, lookup
+├── data/kb.json          база знаний для lookup
+├── tests/                тесты
+├── docs/REPORT.md        краткий отчёт
+├── Dockerfile
+├── docker-compose.yml
+└── .env.example
+```
+
+---
+
 ## Что выполнено по заданию
 
 | Требование | Реализация |
@@ -267,29 +293,6 @@ pip install pytest && pytest -q
 
 ---
 
-## Структура
-
-```
-agent-3-tools/
-├── app/
-│   ├── __main__.py       точка входа python -m app
-│   ├── cli.py            аргументы, REPL, демо-сценарий
-│   ├── config.py         чтение .env без внешних зависимостей
-│   ├── prompts.py        системные промпты и описания инструментов (ru/en)
-│   ├── router_mock.py    детерминированный выбор инструмента
-│   ├── agent.py          MockAgent и LLMAgent (LangGraph)
-│   ├── memory.py         история диалога в SQLite
-│   ├── logging_setup.py  журнал запусков
-│   ├── tracing.py        включение LangSmith
-│   ├── llm.py            ChatOllama + проверка доступности
-│   └── tools/            calculator, now, lookup
-├── data/kb.json          база знаний для lookup
-├── tests/                тесты
-├── docs/REPORT.md        краткий отчёт
-├── Dockerfile
-├── docker-compose.yml
-└── .env.example
-```
 ## Ограничения
 
 - Небольшая локальная модель (3B) иногда ошибается в выборе инструмента - для демонстрации есть mock-режим с предсказуемым поведением.
