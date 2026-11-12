@@ -17,7 +17,7 @@ data/*.sqlite-journal
 logs/
 *.log
 
-# Модели и их веса — в репозиторий не попадают (скачиваются через ollama pull)
+# Модели и их веса - в репозиторий не попадают (скачиваются через ollama pull)
 models/
 *.gguf
 *.safetensors

@@ -9,4 +9,4 @@
 | `03-langsmith-trace.png` | трейсы в LangSmith (проект `agent-3-tools`): чистая история из 7 запусков, раскрыт вызов `lookup` с аргументом `query: Docker` |
 | `04-docker-run.png` | `docker run --rm agent-3-tools --demo`: контейнер работает автономно, в mock-режиме, журнал пишется в `/app/logs/runs.jsonl` |
 
-Время съёмки — 12.11.2026, модель `qwen2.5:3b-instruct`, образ `agent-3-tools:latest` (278 МБ).
+Время съёмки - 12.11.2026, модель `qwen2.5:3b-instruct`, образ `agent-3-tools:latest` (278 МБ).

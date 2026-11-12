@@ -35,5 +35,5 @@ def tracing_status(settings: Settings) -> str:
     if not settings.langsmith_tracing:
         return "выключен (LANGSMITH_TRACING=false)"
     if not settings.langsmith_api_key:
-        return "включён, но нет LANGSMITH_API_KEY — трейсы не уйдут"
+        return "включён, но нет LANGSMITH_API_KEY - трейсы не уйдут"
     return f"включён, проект: {settings.langsmith_project}"

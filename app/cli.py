@@ -45,7 +45,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _print_banner(settings, session: str) -> None:
-    print("agent-3-tools — агент с тремя инструментами")
+    print("agent-3-tools - агент с тремя инструментами")
     print(f"  провайдер : {settings.llm_provider}")
     print(f"  язык      : {settings.prompt_lang}")
     print(f"  сессия    : {session}")
@@ -88,9 +88,9 @@ def _run_repl(agent, session: str) -> int:
         if question in ("/exit", "/quit", "exit", "quit"):
             return 0
         if question == "/help":
-            print("  /history — сколько реплик в текущей сессии")
-            print("  /reset   — очистить историю сессии")
-            print("  /exit    — выход\n")
+            print("  /history - сколько реплик в текущей сессии")
+            print("  /reset   - очистить историю сессии")
+            print("  /exit    - выход\n")
             continue
         if question == "/history":
             print(f"  реплик в сессии {session!r}: {agent.history.count(session)}\n")

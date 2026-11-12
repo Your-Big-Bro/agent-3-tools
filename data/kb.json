@@ -58,7 +58,7 @@
       "id": "config",
       "title": "Настройки и переменные окружения",
       "tags": ["настройки", "env", "переменные", "config", "конфигурация", "timezone", "часовой пояс"],
-      "text": "Все настройки читаются из .env: LLM_PROVIDER, LLM_MODEL, OLLAMA_BASE_URL, PROMPT_LANG, APP_TIMEZONE, LANGSMITH_TRACING, LANGSMITH_API_KEY, LANGSMITH_PROJECT, LANGSMITH_ENDPOINT. Образец — .env.example."
+      "text": "Все настройки читаются из .env: LLM_PROVIDER, LLM_MODEL, OLLAMA_BASE_URL, PROMPT_LANG, APP_TIMEZONE, LANGSMITH_TRACING, LANGSMITH_API_KEY, LANGSMITH_PROJECT, LANGSMITH_ENDPOINT. Образец - .env.example."
     }
   ]
 }
