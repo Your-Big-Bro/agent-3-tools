@@ -9,6 +9,40 @@
 
 ---
 
+## Скриншоты запусков
+
+Реальные прогоны проекта от 12.11.2026 (модель `qwen2.5:3b-instruct`).
+Файлы лежат в [`docs/screenshots/`](docs/screenshots/).
+
+### 1. Демо на локальной модели: выбор инструментов и память
+
+![Демо: 7 запросов, у каждого видна строка tool=...](docs/screenshots/01-demo-console.png)
+
+`python -m app --demo` — на каждый вопрос видно строку `tool=...`: `calculator`, `now`, `lookup`.
+Шаги 4–5 проверяют память: имя «Дима» названо в шаге 4 и воспроизведено в шаге 5.
+
+### 2. Журнал запусков `logs/runs.jsonl`
+
+![Две записи журнала со всеми полями](docs/screenshots/02-runs-jsonl.png)
+
+Две последние записи целиком: `question`, `tool`, `tool_args`, `tool_result`, `answer`, `duration_ms`.
+
+### 3. Трейсы в LangSmith
+
+![Трейс с вызовом lookup и аргументом query: Docker](docs/screenshots/03-langsmith-trace.png)
+
+Проект `agent-3-tools`: 7 чистых запусков, раскрыт вызов `lookup` с аргументом `query: Docker`
+и результатом из базы знаний.
+
+### 4. Запуск в Docker
+
+![docker run --rm agent-3-tools --demo](docs/screenshots/04-docker-run.png)
+
+`docker run --rm agent-3-tools --demo` — контейнер работает автономно, без `.env` и без Ollama
+(внутри mock-режим), журнал пишется в `/app/logs/runs.jsonl`.
+
+---
+
 ## Что закрывает задание
 
 | Требование | Реализация |
@@ -281,14 +315,3 @@ agent-3-tools/
 - Небольшая локальная модель (3B) иногда ошибается в выборе инструмента — для демонстрации есть mock-режим с предсказуемым поведением.
 - `lookup` ищет по заранее подготовленной базе `data/kb.json`, а не по интернету.
 - Трейсинг требует аккаунта LangSmith; без ключа проект работает, но трейсов не будет.
-
----
-
-## Скриншоты запусков
-
-| Файл | Что показывает |
-|---|---|
-| [`01-demo-console.png`](docs/screenshots/01-demo-console.png) | `python -m app --demo` на Ollama: 7 запросов со строками `tool=...` и работа памяти |
-| [`02-runs-jsonl.png`](docs/screenshots/02-runs-jsonl.png) | записи журнала `logs/runs.jsonl` со всеми полями |
-| [`03-langsmith-trace.png`](docs/screenshots/03-langsmith-trace.png) | трейсы в LangSmith: проект `agent-3-tools`, вызов `lookup` с аргументом `query: Docker` |
-| [`04-docker-run.png`](docs/screenshots/04-docker-run.png) | `docker run --rm agent-3-tools --demo` — контейнер работает автономно |
